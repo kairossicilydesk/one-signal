@@ -4,20 +4,24 @@
   <meta charset="utf-8" />
   <title>OneSignal test</title>
 
-  <div class='onesignal-customlink-container'></div>
-
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     OneSignalDeferred.push(async function(OneSignal) {
       await OneSignal.init({
         appId: "abd44397-ceed-419a-9d2b-cd8e87ae17f2",
-        notifyButton: { enable: true }, // botón para suscribirse
+        notifyButton: { enable: true },
+
+        // 👇 fuerza workers en subcarpeta (GitHub Pages project site)
+        serviceWorkerPath: "/one-signal/OneSignalSDKWorker.js",
+        serviceWorkerUpdaterPath: "/one-signal/OneSignalSDKUpdaterWorker.js",
+        serviceWorkerParam: { scope: "/one-signal/" },
       });
     });
   </script>
 </head>
 <body>
+  <div class="onesignal-customlink-container"></div>
   Test OneSignal
 </body>
 </html>
